@@ -1,0 +1,43 @@
+<ion-content >
+  <div class="padding">
+    
+    <div class="logo">
+      <ion-icon color="light" name="sunny"></ion-icon>
+      <!-- <ion-img src="../assets/logo/logo2.png" class="logo"></ion-img> -->
+    </div>
+
+    <ion-item >
+      <ion-label color="light">E-mail</ion-label>
+      <ion-input color="light" type="mail" placeholder="Mail address" [(ngModel)]="email" required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label color="light">Password</ion-label>
+      <ion-input color="light" type="password" placeholder="Password" [(ngModel)]="password" required></ion-input>
+    </ion-item>
+
+    <ion-item lines="none">
+      <ion-button color="light" slot="end" fill="clear">Forget You Password ?</ion-button>
+    </ion-item>
+
+    <ion-button color="light" expand="block" shape="round" fill="outline"(click)="login()">Login</ion-button>
+    <br>
+    <ion-button color="tertiary" expand="block" shape="round" [routerLink]="['/signup']">Register</ion-button>
+
+    <ion-item lines="none">
+      <ion-label color="light" text-center>Or Connect with ? </ion-label>
+    </ion-item>
+    
+    <div class="flex">
+      <ion-button color="facebook" shape="round">
+        <ion-icon slot="start" name="logo-facebook"></ion-icon>
+        Facebook
+      </ion-button>
+      <ion-button color="google" color="youtube" shape="round">
+        <ion-icon slot="start" name="logo-google"></ion-icon>
+        Google
+      </ion-button>
+    </div>
+
+  </div>
+</ion-content>

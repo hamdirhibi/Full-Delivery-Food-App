@@ -1,0 +1,111 @@
+
+<app-nav></app-nav>
+
+<div class="container" style="margin-bottom:50px">
+  <br>
+ <button *ngIf="display" class="btn btn-info pull-right" (click) = "addClick()" >Add new Category</button>  
+ <button *ngIf="isAdd||isUpdate" class="btn btn-info pull-right" (click) = "displayClick()" >Return to list</button>  
+<br>
+
+
+
+<div class="container" *ngIf="display">
+    <input type="text" (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+</div>
+<div class="container"  *ngIf="display">
+<div class="example-container mat-elevation-z8">
+
+  <mat-table [dataSource]="dataSource" matSort>
+
+    <ng-container matColumnDef="name"> 
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Name </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.name}} </mat-cell>
+    </ng-container>
+
+
+
+    <ng-container matColumnDef="delete">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Delete </mat-header-cell>
+      <mat-cell *matCellDef="let row" > <i (click)="deleteCategory(row._id)" style="color:red;cursor: pointer;"class="fa fa-trash fa-2x" ></i> 
+
+  </mat-cell>
+    </ng-container>
+
+
+    <ng-container matColumnDef="update">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Update </mat-header-cell>
+      <mat-cell *matCellDef="let row" >  <i style="cursor: pointer;"class="fa fa-cog fa-2x" (click)="updateClick(row)"></i>
+
+  </mat-cell>
+    </ng-container>
+
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;">
+    </mat-row>
+    
+  </mat-table>
+  <mat-paginator  [pageSizeOptions]="[5, 10, 25,100]" #scheduledOrdersPaginator></mat-paginator>
+
+</div> 
+
+</div>
+</div>
+
+
+
+
+<div *ngIf="isAdd" class="row centered-form" style="margin : 20px">
+
+  
+   
+    <div  class="col-xs-12 col-sm-8 col-md-8 col-sm-offset-2 col-md-offset-2">
+      
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">Category Management <small></small></h3>
+         <div class="alert alert success">{{ message }}</div> 
+        </div> 
+        <div class="panel-body">
+          <form role="form">
+            <div class="form-group " >
+              <label for="countryName" class="">name:  </label>
+              <input type="text" name="firstName" id="product name" class="form-control input-sm" [(ngModel)]="name" placeholder="product name">
+            </div>
+                       <input type="submit" value="Add Category" [disabled]="disabled" (click)="addCateogry()"class="btn btn-info btn-block">
+
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+  <div *ngIf="isUpdate" class="row centered-form" style="margin : 20px">
+
+  
+   
+    <div  class="col-xs-12 col-sm-8 col-md-8 col-sm-offset-2 col-md-offset-2">
+      
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">Category Management <small></small></h3>
+         <div class="alert alert success">{{ message }}</div> 
+        </div> 
+        <div class="panel-body">
+          <form role="form">
+            <div class="form-group " >
+              <label for="countryName" class="">name:  </label>
+              <input type="text" name="firstName" id="product name" class="form-control input-sm" [(ngModel)]="name" placeholder="product name">
+            </div>
+                       <input type="submit" value="Update Category" [disabled]="disabled" (click)="updateCategory()"class="btn btn-info btn-block">
+
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <app-footer></app-footer>

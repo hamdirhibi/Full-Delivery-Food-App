@@ -1,0 +1,31 @@
+<ion-header color="dark">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button style="color : white"></ion-back-button>
+    </ion-buttons>
+    <ion-title style="color: whitesmoke" >My orders</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card >
+    <ion-card-header class="justify-content-center">
+     <ion-card-title >Order : </ion-card-title>
+  </ion-card-header>
+  <!-- <ion-text *ngIf="verifVegetable"><strong>Vegetables</strong></ion-text> -->
+  <div *ngFor="let a of orders">
+     <ion-item *ngIf="a.products[0].image">
+        <ion-avatar slot="start" >
+       <img [src]="uploadUrl + 'uploads/' + a.products[0].image" size="30px">
+     </ion-avatar>
+     <ion-label>
+       <h2><strong>{{a.total |number : '.3-3'}}  DT</strong></h2>
+       <ion-text >{{a.state}} </ion-text> 
+      </ion-label>
+
+      <ion-icon slot="end"name="md-eye" (click)="consult(a)"></ion-icon> 
+       
+   </ion-item>
+  </div>
+    </ion-card>
+</ion-content>

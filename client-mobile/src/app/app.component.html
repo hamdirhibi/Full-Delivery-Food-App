@@ -1,0 +1,25 @@
+<ion-app>
+  <ion-menu side="start" menuId="first" contentId="content1" 
+  style="position: fixed;
+--ion-background-color: linear-gradient(#485563, #29323c);
+" >
+      <ion-header>
+        <ion-toolbar style="text-align : center">
+          <!-- <ion-title style="color: white;font-weight: bold;">MOEZ-DELEVERY</ion-title> -->
+          <img src="../assets/chario.png" style="border-radius: 50%;width : 100px;margin : 30px">
+        </ion-toolbar>
+      </ion-header>
+      <ion-content>
+        <ion-list >
+        <ion-menu-toggle auto-hide="true" *ngFor="let p of navigate">
+          <ion-item [routerLink]="p.url" routerDirection="forward">
+              <ion-icon [name]="p.icon" slot="start" style="color: white;"></ion-icon>
+                <p style="color: white;"> {{p.title}} </p>
+          </ion-item>
+        </ion-menu-toggle>
+        
+        </ion-list>
+      </ion-content>
+    </ion-menu>
+<ion-router-outlet id="content1"></ion-router-outlet>
+</ion-app>

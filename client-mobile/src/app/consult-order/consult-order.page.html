@@ -1,0 +1,73 @@
+<ion-header color="dark">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button style="color : white"></ion-back-button>
+    </ion-buttons>
+    <ion-title style="color: whitesmoke" > Order Details</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card >
+    <ion-card-header class="justify-content-center">
+     <ion-card-title > Bill  : </ion-card-title>
+  </ion-card-header>
+  <!-- <ion-text *ngIf="verifVegetable"><strong>Vegetables</strong></ion-text> -->
+  <div *ngFor="let a of order.products">
+    <ion-item *ngIf="a"  >
+        <ion-avatar slot="start">
+        <img [src]="uploadUrl + 'uploads/' + a.image">
+         </ion-avatar>
+        <ion-label>
+        <h2><strong>{{a.name}}</strong></h2>
+        <ion-text >{{a.price}} DT</ion-text>
+        </ion-label>
+        <ion-text slot="end"><strong> {{a.ctn}} KG</strong></ion-text> 
+    </ion-item>
+    </div>
+
+  </ion-card>
+  <ion-card>
+
+  <div>
+    <ion-item  >
+       <ion-text slot="start"><strong>TVA</strong></ion-text>
+       <ion-text slot="end">6 DT</ion-text>
+    </ion-item>
+    </div>
+    
+
+    <ion-item >
+          <ion-text slot="start"><strong>Total</strong></ion-text>
+          <ion-text slot="end">{{order.total|number : '.3-3'}} DT</ion-text>
+    </ion-item>
+    
+       <ion-item >
+        <ion-text slot="start"><strong>PHONE</strong></ion-text>
+        <ion-input type="number" style="text-align: end;"[(ngModel)]="order.phone"slot="end" readonly></ion-input>
+             </ion-item>
+       <ion-item>
+          <ion-label><strong>DELIVERY DATE :</strong></ion-label>
+          <ion-datetime  cancelable="false"  readonly [(ngModel)]="order.deleveryDate"  ></ion-datetime>
+       </ion-item>
+       <!-- <ion-item>
+             <ion-label><strong>DELIVERY TIME :</strong></ion-label>
+             <ion-datetime displayFormat="h:mm " pickerFormat="h:mm" hourValues="0,1,2,3"  [(ngModel)]="date2"  (change)="showdate()" > </ion-datetime>
+      </ion-item> -->
+       <ion-item>
+             <ion-label><strong>PAYMENT METHOD</strong></ion-label>
+             <ion-input type="text" [(ngModel)]="order.paymentMethod"style="text-align: end;" readonly></ion-input>
+
+       </ion-item>
+                        
+      
+    </ion-card>
+    <ion-card>
+      <ion-item >
+         <ion-label position="start"><strong>Free Space : </strong></ion-label> 
+         </ion-item>
+   
+      <textarea  type="text" [(ngModel)]="order.freeSpace"  style="width:100%;margin:15px" readonly></textarea>
+    </ion-card>
+
+</ion-content>

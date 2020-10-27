@@ -1,0 +1,176 @@
+
+<app-nav></app-nav>
+
+ <div class="container" style="margin-bottom:50px">
+   <br>
+  <button *ngIf="display" class="btn btn-info pull-right" (click) = "addClick()" >Add new Product</button>  
+  <button *ngIf="isAdd" class="btn btn-info pull-right" (click) = "addClick()" >Return to list</button>  
+<br>
+  
+   <!---add new Product-->
+
+ <div *ngIf="isAdd" class="row centered-form" style="margin : 20px">
+
+  
+   
+    <div  class="col-xs-12 col-sm-8 col-md-8 col-sm-offset-2 col-md-offset-2">
+      
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">Product Management <small></small></h3>
+         <div class="alert alert success">{{ message }}</div> 
+        </div> 
+        <div class="panel-body">
+          <form role="form">
+            <div class="form-group " >
+              <label for="countryName" class="">name:  </label>
+              <input type="text" name="firstName" id="product name" class="form-control input-sm" [(ngModel)]="name" placeholder="product name">
+            </div>
+            <div class="form-group " >
+              <label for="countryName" class="">Price:  </label>
+              <input type="text" name="lastName" id="produt price" class="form-control input-sm" [(ngModel)]="price" placeholder="product price" required>
+            </div>
+            <div class="form-group " >
+              <label for="categories" class=""> Category : &nbsp;&nbsp; </label>
+              <select name="categories" [(ngModel)]="category"  required>
+                <option  [value]='category.name' *ngFor="let category of categories" >{{category.name}}</option>
+              </select>
+            </div>
+
+            <div class="form-group " >
+              <label for="categories" class=""> Image : &nbsp;&nbsp; </label>
+              <input
+              type="file"
+              id="image" 
+              name="image"
+              class="form-control"
+              (change)="fileChanged($event)"
+              accept="image/*"
+            />
+
+            </div>
+
+
+            <div class="form-group" >
+                <label for="categories" class=""> Available : &nbsp;&nbsp; </label>
+                <select name="categories" [(ngModel)]="available"    required>
+                  <option  value='true'>true</option>
+                  <option  value='false'>false</option>
+                </select>
+              </div>
+
+
+              <div class="form-group" >
+                <label for="categories" class=""> Unit Id : &nbsp;&nbsp; </label>
+                <select name="categories" [(ngModel)]="unit_id"   required>
+                  <option  value='KG'>KG</option>
+                  <option  value='KG'>G</option>
+                  <option  value='L'>L</option>
+                  
+                </select>
+              </div>
+
+              <div class="form-group" >
+                <label for="countryName" class="">Unit_qte  </label>
+                <input type="number" name="firstName" id="product name" class="form-control input-sm" [(ngModel)]="unit_qte" placeholder="Unit_qte">
+              </div>
+  
+            <input type="submit" value="Register" [disabled]="disabled" (click)="addProduct()"class="btn btn-info btn-block">
+
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+ <div class="container" *ngIf="display">
+    <input type="text" (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+</div>
+<br>
+<div class="container"  *ngIf="display">
+<div class="example-container mat-elevation-z8">
+
+  <mat-table [dataSource]="dataSource" matSort>
+
+    <ng-container matColumnDef="image">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Image </mat-header-cell>
+      <mat-cell *matCellDef="let row"><img [src]="uploadUrl + 'uploads/' + row.image" style="width: 50px;height: 50;border-radius: 50%;"> </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Name </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.name}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="price">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> price </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.price}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="category">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Category </mat-header-cell>
+      <mat-cell *matCellDef="let row" > {{row.category}} </mat-cell>
+    </ng-container>
+
+
+
+    <ng-container matColumnDef="available">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> available </mat-header-cell>
+      <mat-cell *matCellDef="let row" > {{row.available}} </mat-cell>
+    </ng-container>
+
+
+    <ng-container matColumnDef="unit_id">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Unit ID </mat-header-cell>
+      <mat-cell *matCellDef="let row" > {{row.unit_id}} </mat-cell>
+    </ng-container>
+
+
+
+    <ng-container matColumnDef="unit_qte">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Unit Qte </mat-header-cell>
+      <mat-cell *matCellDef="let row" > {{row.unit_qte}} </mat-cell>
+    </ng-container>
+
+
+    <ng-container matColumnDef="delete">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Delete </mat-header-cell>
+      <mat-cell *matCellDef="let row" > <i (click)="deleteProduct(row._id)" style="color:red;cursor: pointer;"class="fa fa-trash fa-2x" ></i> 
+
+  </mat-cell>
+    </ng-container>
+
+
+    <ng-container matColumnDef="update">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Update </mat-header-cell>
+      <mat-cell *matCellDef="let row" >  <i style="cursor: pointer;"class="fa fa-cog fa-2x" (click)="updateClick(row)"></i>
+
+  </mat-cell>
+    </ng-container>
+
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;">
+    </mat-row>
+    
+  </mat-table>
+  <mat-paginator  [pageSizeOptions]="[5, 10, 25,100]" #scheduledOrdersPaginator></mat-paginator>
+
+</div> 
+
+</div>
+
+<!-- Copyright 2018 Google Inc. All Rights Reserved.
+    Use of this source code is governed by an MIT-style license that
+    can be found in the LICENSE file at http://angular.io/license -->
+
+</div >
+
+    <app-footer ></app-footer>

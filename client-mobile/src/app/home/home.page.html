@@ -1,0 +1,264 @@
+<ion-header color="dark">
+   <ion-toolbar>
+     <ion-title style="color: whitesmoke" >Home</ion-title>
+   </ion-toolbar>
+ </ion-header>
+ 
+<ion-content >
+   <ion-img *ngIf="tab==1" src="../assets/salade.jpg" width="100%"  style=" width : 100% ;height : 200px ; position :inherit ;  text-shadow: 1px 1px 2px black, 0 0 25px darkslategrey, 0 0 5px darkslategrey;"></ion-img>
+   <ion-img *ngIf="tab==2" src="../assets/fruits.jpg" width="100%"  style=" width : 100% ;height : 200px ; position :inherit ;  text-shadow: 1px 1px 2px black, 0 0 25px darkslategrey, 0 0 5px darkslategrey;"></ion-img>
+   <ion-img *ngIf="tab==3" src="../assets/juices.png" width="100%"  style=" width : 100% ;height : 200px ; position :inherit ;  text-shadow: 1px 1px 2px black, 0 0 25px darkslategrey, 0 0 5px darkslategrey;"></ion-img>
+<hr>
+  <div class="ion-padding">
+    <ion-grid>
+
+      <div *ngIf="tab==20" class="spinner">
+         <div class="bounce1"></div>
+         <div class="bounce2"></div>
+         <div class="bounce3"></div>
+       </div>
+     <div *ngIf="tab==1">
+      <ion-row>
+          <ion-col size="10" offset="1">
+            <ion-card >  
+               <!-- <ion-img src="../assets/salade.jpg"></ion-img> -->
+            </ion-card>
+         </ion-col>
+      </ion-row>
+
+      <ion-row>
+
+          <ion-col size="10" offset="1" text-center>
+            <ion-text color="twitter" class="text">
+                <p>PLEASE FOLLOW THE STEPS BELOW TO CUSTOMIZE YOUR ORDER.</p>  
+            </ion-text>
+         </ion-col>
+      </ion-row>
+
+  </div>
+
+    <div *ngIf="tab==1">
+      <ion-row>
+          <ion-col size="10" offset="1" text-center>
+            <ion-text color="twitter" >
+                <p>CHOOSE YOUR VEGETABLES</p>
+            </ion-text>
+         </ion-col>
+      </ion-row>
+      <ion-row style="z-index: 0;" >
+         <ion-col size="6" class="box"   (click)="choseVegetable(b._id)"  *ngFor="let b of vegetables" style="cursor: pointer;">
+            <ion-img [id]="b._id"  [ngStyle]="notAvailableStyle" *ngIf="b.available==false" [src]="uploadUrl + 'uploads/' + b.image"></ion-img>
+            <!-- <ion-img [id]="b.id" src="../../assets/aprove.png" style="position : relative"></ion-img> -->
+            <ion-img [id]="b._id" *ngIf="b.available" [src]="uploadUrl + 'uploads/' + b.image"></ion-img>
+
+            <ion-text class="text" *ngIf="b.available">{{b.name}}&nbsp;{{b.price|number : '.3-3'}}/kg</ion-text><br>
+            <ion-text class="text"  *ngIf="!b.available"> Not available</ion-text><br>
+
+         </ion-col>
+        
+      </ion-row>
+   </div>
+
+   <div *ngIf="tab==2">
+      <ion-row>
+          <ion-col size="10" offset="1">
+            <ion-card >  
+               <!-- <ion-img src="../assets/fruits.jpg"></ion-img> -->
+            </ion-card>
+         </ion-col>
+      </ion-row>
+
+  </div>
+
+    <div *ngIf="tab==2">
+      <ion-row>
+          <ion-col size="10" offset="1" text-center>
+            <ion-text color="twitter" class="text">
+               <p>CHOOSE YOUR FRUITS</p>
+            </ion-text>
+         </ion-col>
+      </ion-row>
+      <ion-row style="height: 10px;vertical-align: center;text-align: center;">
+         <ion-col  size="6" class="box"   (click)="choseFruit(b._id)" *ngFor="let b of fruits" style="cursor: pointer;">
+            <ion-img [id]="b._id"  [ngStyle]="notAvailableStyle" *ngIf="b.available==false" [src]="uploadUrl + 'uploads/' + b.image"></ion-img>
+            <!-- <ion-img [id]="b.id" src="../../assets/aprove.png" style="position : relative"></ion-img> -->
+            <ion-img [id]="b._id" *ngIf="b.available" [src]="uploadUrl + 'uploads/' + b.image"></ion-img>
+
+            <ion-text class="text" *ngIf="b.available">{{b.name}}&nbsp;{{b.price|number : '.3-3'}}/kg</ion-text><br>
+            <ion-text class="text"  *ngIf="!b.available"> Not available</ion-text><br>
+
+         </ion-col>
+        
+      </ion-row>
+   </div>  
+    </ion-grid>
+  </div>
+
+
+  <div *ngIf="tab==3">
+   <ion-row>
+      <ion-col size="10" offset="1">
+         <ion-card >  
+            <!-- <ion-img src="../assets/juices.png"></ion-img> -->
+        </ion-card>
+     </ion-col>
+  </ion-row>
+
+
+   <ion-row>
+       <ion-col size="10" offset="1" text-center>
+         <ion-text color="twitter" class="text">
+            <p>CHOOSE YOUR JUICES </p>  
+         </ion-text>
+      </ion-col>
+   </ion-row>
+   <ion-row>
+        <ion-col size="4" class="box" (click)="choseJuice(b._id)" *ngFor="let b of juices" >
+         <ion-img [id]="b._id"  [ngStyle]="notAvailableStyle" *ngIf="b.available==false" [src]="uploadUrl + 'uploads/' + b.image"></ion-img>
+         <!-- <ion-img [id]="b.id" src="../../assets/aprove.png" style="position : relative"></ion-img> -->
+         <ion-img [id]="b._id" *ngIf="b.available" [src]="uploadUrl + 'uploads/' + b.image"></ion-img>
+
+         <ion-text class="text" *ngIf="b.available">{{b.name}}&nbsp;{{b.price|number : '.3-3'}}/kg</ion-text><br>
+         <ion-text class="text"  *ngIf="!b.available"> Not available</ion-text><br>
+
+      </ion-col>
+      
+   </ion-row>
+</div>
+
+
+  <div *ngIf="tab==4" size="12">
+     <ion-card>
+     <ion-card-header class="justify-content-center">
+      <ion-card-title  >
+         Bill : </ion-card-title>
+   </ion-card-header>
+   <ion-text *ngIf="verifVegetable"><strong>Vegetables</strong></ion-text>
+   <div *ngFor="let a of vegetables">
+      <ion-item *ngIf="a.checked==true" >
+         <ion-avatar slot="start">
+        <img [src]="uploadUrl + 'uploads/' + a.image">
+      </ion-avatar>
+      <ion-label>
+        <h2><strong>{{a.name}}</strong></h2>
+        <ion-text >{{a.price}} DT</ion-text>
+        </ion-label>
+        <ion-icon slot="end" name="arrow-dropup" (click)="upbase(a._id)"></ion-icon>
+        <ion-text slot="end"><strong> {{a.ctn}} kg</strong></ion-text> 
+        <ion-icon slot="end" name="arrow-dropdown"  (click)="downbase(a._id)"></ion-icon>
+    </ion-item>
+   </div>
+      
+   
+   <ion-text *ngIf="verifFruit"><strong>Fruits</strong></ion-text>
+
+         <div *ngFor="let a of fruits">
+         <ion-item *ngIf="a.checked==true" >
+            <ion-avatar slot="start">
+               <img [src]="uploadUrl + 'uploads/' + a.image">
+            </ion-avatar>
+         <ion-label>
+            <h2><strong>{{a.name}}</strong></h2>
+            <ion-text >{{a.price}} DT</ion-text>
+       
+           </ion-label>
+           <ion-icon slot="end" name="arrow-dropup" (click)="upbase(a._id)"></ion-icon>
+           <ion-text slot="end"><strong> {{a.ctn}} kg</strong></ion-text> 
+           <ion-icon slot="end" name="arrow-dropdown"  (click)="downbase(a._id)"></ion-icon>
+       </ion-item>
+      </div>
+
+
+
+      <ion-text *ngIf="verifJuice"><strong>Juices</strong></ion-text>
+
+      <div *ngFor="let a of juices">
+         <ion-item *ngIf="a.checked==true" >
+            <ion-avatar slot="start">
+               <img [src]="uploadUrl + 'uploads/' + a.image">
+            </ion-avatar>
+         <ion-label>
+            <h2><strong>{{a.name}}</strong></h2>
+            <ion-text >{{a.price}} DT</ion-text>
+       
+           </ion-label>
+           <ion-icon slot="end" name="arrow-dropup" (click)="upbase(a._id)"></ion-icon>
+           <ion-text slot="end"><strong> {{a.ctn}} kg</strong></ion-text> 
+           <ion-icon slot="end" name="arrow-dropdown"  (click)="downbase(a._id)"></ion-icon>
+       </ion-item>
+      </div>
+
+
+
+
+
+
+
+      <div>
+      <ion-item  >
+         <ion-text slot="start"><strong>TVA</strong></ion-text>
+         <ion-text slot="end">6 DT</ion-text>
+      </ion-item>
+      </div>
+      
+
+      <ion-item >
+            <ion-text slot="start"><strong>Total</strong></ion-text>
+            <ion-text slot="end">{{somme|number : '.3-3'}} DT</ion-text>
+      </ion-item>
+      
+      </ion-card>
+      <ion-card>
+         <ion-item >
+               <ion-label position="floating"><strong>PHONE</strong></ion-label>
+               <ion-input type="number" [(ngModel)]="tel"></ion-input>
+               </ion-item>
+         <ion-item>
+            <ion-label><strong>DELIVERY DATE :</strong></ion-label>
+            <ion-datetime min="{{date}}" cancelable="false"  [(ngModel)]="date1" (change)="showdate()" ></ion-datetime>
+         </ion-item>
+         <!-- <ion-item>
+               <ion-label><strong>DELIVERY TIME :</strong></ion-label>
+               <ion-datetime displayFormat="h:mm " pickerFormat="h:mm" hourValues="0,1,2,3"  [(ngModel)]="date2"  (change)="showdate()" > </ion-datetime>
+        </ion-item> -->
+         <ion-item>
+               <ion-label><strong>PAYMENT METHOD</strong></ion-label>
+               <ion-select placeholder="Choose payment method" [(ngModel)]="choix">
+                 <ion-select-option value="1">CARD PAYMENT</ion-select-option>
+                 <ion-select-option value="2">CASH PAYMENT</ion-select-option>
+               </ion-select>
+         </ion-item>
+      </ion-card>
+      <ion-card>
+         <ion-item >
+            <ion-label position="start"><strong>Order Address : </strong></ion-label> 
+            </ion-item>
+      </ion-card>
+      <ion-card class="container">
+         <textarea type="text" [(ngModel)]="orderAddress" placeholder="Order address ... " style="width:100%"></textarea>
+      </ion-card>
+      <ion-card>
+         <ion-item >
+            <ion-label position="start"><strong>Free Space : </strong></ion-label> 
+            </ion-item>
+      </ion-card>
+      <ion-card class="container">
+         <textarea type="text" [(ngModel)]="text" placeholder="something else ... " style="width:100%"></textarea>
+      </ion-card>
+  </div>
+
+</ion-content>
+
+<ion-footer>
+      <div text-right>
+        <ion-button slot="start"  (click)="gotoback()" *ngIf="tab>1&&tab<4" >BACK <ion-icon slot="start" name="arrow-back"></ion-icon></ion-button>
+              
+   
+        <ion-button slot="end" color="warning" (click)="gotoFirst()" *ngIf="tab==4"><ion-icon slot="start" name="settings"></ion-icon> Modifier Commande </ion-button>
+        <ion-button slot="end" color="success" (click)="sendCommand()" *ngIf="tab==4"><ion-icon slot="start" name="send"></ion-icon> envoyer </ion-button>
+
+   
+        <ion-button slot="end" color="success" (click)="gotonext()" *ngIf="tab<4">NEXT <ion-icon slot="end" name="arrow-forward"></ion-icon></ion-button>
+      </div>
+</ion-footer>
+

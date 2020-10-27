@@ -1,0 +1,65 @@
+<app-nav></app-nav>
+<body>
+  <div class="container">
+    <section class="pricing py-5">
+      <div class="container">
+        <div class="row">
+          <!-- Free Tier -->
+          <div class="col-lg-4" *ngFor="let order of orders">
+            <div class="card mb-5 mb-lg-0">
+              <div class="card-body">
+                <span
+                  *ngIf="!order.view"
+                  style="position: absolute;"
+                  class="badge badge-info"
+                  >New</span
+                >
+                <h5 class="card-title text-muted text-uppercase text-center">
+                  {{ order.deleveryDate | date }}
+                </h5>
+                <h6 class="card-price text-center">
+                  $ {{ order.total | number: ".1"
+                  }}<span class="period">/Dt</span>
+                </h6>
+                <h5 class="card-title text-muted text-uppercase text-center">
+                  Weight : {{ order.weight }} KG
+                </h5>
+                <hr />
+                <!-- <ul class="fa-ul">
+                <li  *ngFor="let prod of order.products" style=" display: inline-block;">
+                  <img slot="start" [src]="uploadUrl + 'uploads/' + prod.image" style="width: 50px;height: 50;border-radius: 50%;">
+                    <p slot="end"><strong>{{prod.name}}</strong>
+                  </p>
+
+                  &nbsp;&nbsp;&nbsp;
+                  <p slot="end"><strong>{{prod.name}}</strong>
+                  </p>
+
+
+
+
+                  <div class="float-left">
+                  </div>
+                  <div class="" style="vertical-align: center;" >
+                  </div>
+                  <br>
+                </li>
+
+              </ul> -->
+                <button
+                  (click)="view(order)"
+                  class="btn btn-block btn-primary text-uppercase"
+                >
+                  <i class="fa fa-eye"></i> &nbsp;&nbsp; View Order
+                </button>
+              </div>
+            </div>
+            <br />
+          </div>
+          <!-- Plus Tier -->
+        </div>
+      </div>
+    </section>
+  </div>
+</body>
+<app-footer></app-footer>

@@ -1,0 +1,72 @@
+<app-nav></app-nav>
+
+<div class="container" style="margin-top: 20px;margin-bottom: 50px;" >
+    <input type="text" (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+    
+   
+    
+
+    <button  class="btn btn-dark pull-right" (click) = "filter('onProgress')" style="margin-left: 5px;" > <i style="color: orange" class="fa fa-spinner fa-2x"></i> &nbsp; OnProgress</button>  
+    <button  class="btn btn-dark pull-right" (click) = "filter('accepted')" style="margin-left: 5px;">  <i style="color:green" class="fa fa-check-circle fa-2x"></i> &nbsp;Accepted</button>  
+    <button  class="btn btn-dark pull-right" (click) = "filter('refused')" style="margin-left: 5px;" > <i style="color: red" class="fa fa-close fa-2x"></i> &nbsp; Refused</button>  
+    <button  class="btn btn-dark pull-right" (click) = "filter('confirmed')" style="margin-left: 5px;" > <i class="fa fa-check fa-2x"></i> &nbsp; Confirmed</button>  
+    <button  class="btn btn-dark pull-right" (click) = "filter('')" style="margin-left: 5px;" > <i class="fa fa-list fa-2x"></i> &nbsp; All</button>  
+
+</div>
+<div class="container" style="margin-bottom: 50px;"  >
+<div class="example-container mat-elevation-z8" style="margin-top: 30px;">
+
+  <mat-table [dataSource]="dataSource" matSort>
+
+    <ng-container matColumnDef="image">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Image </mat-header-cell>
+      <mat-cell *matCellDef="let row"><img [src]="uploadUrl + 'uploads/' + row.products[0].image" style="width: 50px;height: 50;border-radius: 50%;"> </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="total">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Price </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.total |number : '.1' }} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="date">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Delevery Date </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.deleveryDate | date}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="weight">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Weight </mat-header-cell>
+      <mat-cell *matCellDef="let row" > {{row.weight}} /KG </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="status">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Status </mat-header-cell>
+        <mat-cell *matCellDef="let row" > 
+            <i style="color: orange" *ngIf="row.state=='onProgress'"class="fa fa-spinner fa-2x"></i>
+            <i style="color:green" *ngIf="row.state=='accepted'"class="fa fa-check-circle fa-2x"></i>
+            <i style="color: red" *ngIf="row.state=='refused'"class="fa fa-close fa-2x"></i>
+            <i  *ngIf="row.state=='confirmed'" class="fa fa-check fa-2x"></i>
+            &nbsp; {{row.state}}
+        </mat-cell>
+      </ng-container>
+    
+
+    <ng-container matColumnDef="view">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> View </mat-header-cell>
+      <mat-cell *matCellDef="let row" > <i (click)="view(row)" style="cursor: pointer;"class="fa fa-eye fa-2x" ></i> 
+  </mat-cell>
+    </ng-container>
+
+
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;">
+    </mat-row>
+    
+  </mat-table>
+  <mat-paginator  [pageSizeOptions]="[5, 10, 25,100]" #scheduledOrdersPaginator></mat-paginator>
+
+</div> 
+
+</div>
+
+<app-footer></app-footer>

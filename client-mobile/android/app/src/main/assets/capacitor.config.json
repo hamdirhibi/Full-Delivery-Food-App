@@ -1,0 +1,7 @@
+{
+  "appId": "com.ionicfirstapp.geekrhibi.starter",
+  "appName": "FreelancePart1",
+  "bundledWebRuntime": false,
+  "npmClient": "npm",
+  "webDir": "www"
+}
